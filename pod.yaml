@@ -7,10 +7,4 @@ metadata:
 spec:
   containers:
   - name: hello-container
-    image: nginx
-  - name: shell
-    image: centos:7
-    command:
-      - "bin/bash"
-      - "-c"
-      - "sleep 10000"
+    image: murali383/hello-service
