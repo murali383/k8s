@@ -1,0 +1,52 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: dev-pf-audit-svc-platform-audit-svc
+  labels:
+    app: platform-audit-svc
+    chart: platform-audit-svc-0.1.0
+    release: dev-pf-audit-svc
+    version: 0.1.0
+    type: service
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: platform-audit-svc
+    spec:
+      containers:
+        - name: filebeat
+          image: docker.elastic.co/beats/filebeat:6.2.4
+          volumeMounts:
+          - name: logs
+            mountPath: /usr/log
+        - name: dev-pf-audit-svc-platform-audit-svc
+          image: intellectdevcloud/platform-audit-service:18.1.1-k8s
+          ports:
+            - containerPort: 2002
+          env:
+            - name: CLASSPATH
+              value: "/platform/config/:/"
+          imagePullPolicy: Always
+          resources:
+            requests:
+              memory: "200Mi"
+              cpu: "250m"
+            limits:
+              memory: "1536Mi"
+              cpu: "500m"
+          volumeMounts:
+          - name: platformconfig
+            mountPath: /platform/config
+          - name: logs
+            mountPath: /usr/log
+      restartPolicy: Always
+      volumes:
+        - name: platformconfig
+          configMap:
+            name: platform-audit-config
+        - name: logs
+          emptyDir: {}
+      imagePullSecrets:
+        - name: regsecret
