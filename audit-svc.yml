@@ -17,12 +17,12 @@ spec:
     spec:
       containers:
         - name: filebeat
-          image: intellectdevcloud/platform-filebeat:latest
+          image: intellectdevcloud/platform-filebeat:18.1.1-k8s
           volumeMounts:
           - name: logs
             mountPath: /usr/log
         - name: dev-pf-audit-svc-platform-audit-svc
-          image: intellectdevcloud/platform-audit-service:latest
+          image: intellectdevcloud/platform-audit-service:18.1.1-k8s
           ports:
             - containerPort: 2002
           env:
