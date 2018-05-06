@@ -18,6 +18,7 @@ spec:
       containers:
         - name: filebeat
           image: intellectdevcloud/platform-filebeat:latest
+          imagePullPolicy: Always
           volumeMounts:
           - name: logs
             mountPath: /usr/log
