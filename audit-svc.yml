@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
         - name: filebeat
-          image: docker.elastic.co/beats/filebeat:6.2.4
+          image: intellectdevcloud/platform-filebeat:latest
           volumeMounts:
           - name: logs
             mountPath: /usr/log
