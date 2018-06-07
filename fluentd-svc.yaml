@@ -1,0 +1,18 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: infra-fluentd-svc
+  labels:
+    app: infra-fluentd-svc
+    type: service
+spec:
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 24224
+      name: infra-fluentd-port
+  selector:
+    app: elasticsearch
+    component: elasticsearch-fluentd
+    type: daemonset
+  type: ClusterIP
