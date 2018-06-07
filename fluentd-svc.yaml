@@ -9,7 +9,7 @@ spec:
   ports:
     - protocol: TCP
       port: 80
-      targetPort: 9880
+      targetPort: 24224
       name: infra-fluentd-port
   selector:
     component: elasticsearch-fluentd
