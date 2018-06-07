@@ -12,7 +12,5 @@ spec:
       targetPort: 9880
       name: infra-fluentd-port
   selector:
-    app: elasticsearch
     component: elasticsearch-fluentd
-    type: daemonset
   type: ClusterIP
